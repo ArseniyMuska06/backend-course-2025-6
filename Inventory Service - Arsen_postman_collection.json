@@ -1,0 +1,299 @@
+{
+	"info": {
+		"_postman_id": "966eed47-be99-4b41-9dad-9286149827ea",
+		"name": "Inventory Service - Arsen",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50104582",
+		"_collection_link": "https://arseniymuska06-99124.postman.co/workspace/ArsenMuska06's-Workspace~d12b9c1f-2896-4ca4-82e9-0a08389cd02b/collection/50104582-966eed47-be99-4b41-9dad-9286149827ea?action=share&source=collection_link&creator=50104582"
+	},
+	"item": [
+		{
+			"name": "POST /register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "inventory_name",
+							"value": "Молоток2",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Сталевий молоток2",
+							"type": "text"
+						},
+						{
+							"key": "photo",
+							"type": "file",
+							"src": "/D:/git-repos/backend-course-2025-6/photo.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/register",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /inventory",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:3000/inventory",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"inventory"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /inventory/:id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:3000/inventory/mi1j2hnyvl0erc",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"inventory",
+						"mi1j2hnyvl0erc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE /inventory/:id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:3000/inventory/ID_HERE",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"inventory",
+						"ID_HERE"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT /inventory/:id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"Новий молоток2\",\"description\":\"Оновлений опис2\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/inventory/mi1j2hnyvl0erc",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"inventory",
+						"mi1j2hnyvl0erc"
+					]
+				},
+				"description": "Generated from cURL: curl -X PUT http://127.0.0.1:3000/inventory/ID_TYT \\\r\n-H \"Content-Type: application/json\" \\\r\n-d '{\"name\":\"Новий молоток\",\"description\":\"Оновлений опис\"}'\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "GET /inventory/:id/photo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:3000/inventory/mi1j2hnyvl0erc/photo",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"inventory",
+						"mi1j2hnyvl0erc",
+						"photo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT /inventory/:id/photo",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "photo",
+							"type": "file",
+							"src": "/C:/Users/Арсен/Downloads/Telegram Desktop/image.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/inventory/mi1j2hnyvl0erc/photo",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"inventory",
+						"mi1j2hnyvl0erc",
+						"photo"
+					]
+				},
+				"description": "Generated from cURL: curl -X PUT http://127.0.0.1:3000/inventory/ID_TYT/photo \\\r\n-F \"photo=@new.jpg\"\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "GET /SearchForm.html",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:3000/SearchForm.html",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"SearchForm.html"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /search",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "mi1j2hnyvl0erc",
+							"type": "text"
+						},
+						{
+							"key": "has_photo",
+							"value": "true",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/search",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /RegisterForm.html",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:3000/RegisterForm.html",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"RegisterForm.html"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
