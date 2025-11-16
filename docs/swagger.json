@@ -1,0 +1,241 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Inventory Service",
+    "version": "1.0.0",
+    "description": "Simple inventory service for lab work"
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:3000"
+    }
+  ],
+  "paths": {
+    "/register": {
+      "post": {
+        "summary": "Register new inventory item",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "inventory_name": { "type": "string" },
+                  "description": { "type": "string" },
+                  "photo": { "type": "string", "format": "binary" }
+                },
+                "required": ["inventory_name"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Item created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InventoryItem"
+                }
+              }
+            }
+          },
+          "400": { "description": "Bad request" }
+        }
+      }
+    },
+    "/inventory": {
+      "get": {
+        "summary": "Get all inventory items",
+        "responses": {
+          "200": {
+            "description": "List of items",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/InventoryItem" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/inventory/{id}": {
+      "get": {
+        "summary": "Get item by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Item",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/InventoryItem" }
+              }
+            }
+          },
+          "404": { "description": "Not found" }
+        }
+      },
+      "put": {
+        "summary": "Update item name/description",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "description": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Updated item" },
+          "404": { "description": "Not found" }
+        }
+      },
+      "delete": {
+        "summary": "Delete item",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Deleted" },
+          "404": { "description": "Not found" }
+        }
+      }
+    },
+    "/inventory/{id}/photo": {
+      "get": {
+        "summary": "Get item photo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "JPEG image",
+            "content": {
+              "image/jpeg": {
+                "schema": { "type": "string", "format": "binary" }
+              }
+            }
+          },
+          "404": { "description": "Not found" }
+        }
+      },
+      "put": {
+        "summary": "Update item photo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "photo": { "type": "string", "format": "binary" }
+                },
+                "required": ["photo"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Photo updated" },
+          "404": { "description": "Not found" }
+        }
+      }
+    },
+    "/search": {
+      "post": {
+        "summary": "Search item by ID",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": { "type": "string" },
+                  "has_photo": { "type": "string" }
+                },
+                "required": ["id"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Item found" },
+          "404": { "description": "Not found" }
+        }
+      }
+    },
+    "/RegisterForm.html": {
+      "get": {
+        "summary": "HTML form for register",
+        "responses": {
+          "200": { "description": "HTML page" }
+        }
+      }
+    },
+    "/SearchForm.html": {
+      "get": {
+        "summary": "HTML form for search",
+        "responses": {
+          "200": { "description": "HTML page" }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "InventoryItem": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "photo": { "type": "string", "format": "uri" }
+        }
+      }
+    }
+  }
+}

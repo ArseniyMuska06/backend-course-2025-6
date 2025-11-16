@@ -128,6 +128,48 @@ server.on('request', async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host || host + ':' + port}`);
   const method = req.method || 'GET';
 
+  /**
+   * @route GET /docs
+   * @description Swagger documentation UI
+   * @returns {200} HTML page with Swagger UI
+   */
+  if (url.pathname === '/docs') {
+    const filePath = path.join(__dirname, 'docs', 'index.html');
+    if (!fs.existsSync(filePath)) {
+      res.statusCode = 404;
+      res.end('Docs not found\n');
+      return;
+    }
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    fs.createReadStream(filePath).pipe(res);
+    return;
+  }
+
+  /**
+   * @route GET /swagger.json
+   * @description Swagger OpenAPI JSON
+   * @returns {200} OpenAPI documentation
+   */
+  if (url.pathname === '/swagger.json') {
+    const filePath = path.join(__dirname, 'docs', 'swagger.json');
+    if (!fs.existsSync(filePath)) {
+      res.statusCode = 404;
+      res.end('Swagger not found\n');
+      return;
+    }
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    fs.createReadStream(filePath).pipe(res);
+    return;
+  }
+
+  /**
+   * @route GET /RegisterForm.html
+   * @description HTML форма реєстрації речі
+   * @returns {200} HTML
+   * @returns {404} Not Found
+   */
   if (url.pathname === '/RegisterForm.html') {
     if (method !== 'GET') {
       res.statusCode = 405;
@@ -146,6 +188,12 @@ server.on('request', async (req, res) => {
     return;
   }
 
+  /**
+   * @route GET /SearchForm.html
+   * @description HTML форма пошуку
+   * @returns {200} HTML
+   * @returns {404} Not Found
+   */
   if (url.pathname === '/SearchForm.html') {
     if (method !== 'GET') {
       res.statusCode = 405;
@@ -164,6 +212,13 @@ server.on('request', async (req, res) => {
     return;
   }
 
+  /**
+   * @route POST /register
+   * @description Реєстрація нового інвентаря
+   * @returns {201} Created
+   * @returns {400} Bad Request
+   * @accept multipart/form-data
+   */
   if (url.pathname === '/register') {
     if (method !== 'POST') {
       res.statusCode = 405;
@@ -192,6 +247,11 @@ server.on('request', async (req, res) => {
     return;
   }
 
+  /**
+   * @route GET /inventory
+   * @description Отримати список всього інвентаря
+   * @returns {200} OK
+   */
   if (url.pathname === '/inventory') {
     if (method !== 'GET') {
       res.statusCode = 405;
@@ -210,6 +270,14 @@ server.on('request', async (req, res) => {
     return;
   }
 
+  /**
+   * @route GET /inventory/{id}
+   * @route PUT /inventory/{id}
+   * @route DELETE /inventory/{id}
+   * @description Робота з конкретним елементом інвентаря
+   * @returns {200} OK
+   * @returns {404} Not Found
+   */
   if (/^\/inventory\/[^/]+$/.test(url.pathname)) {
     const id = url.pathname.split('/')[2];
     if (method === 'GET') {
@@ -261,6 +329,13 @@ server.on('request', async (req, res) => {
     return;
   }
 
+  /**
+   * @route GET /inventory/{id}/photo
+   * @route PUT /inventory/{id}/photo
+   * @description Робота з фото інвентаря
+   * @returns {200} OK
+   * @returns {404} Not Found
+   */
   if (/^\/inventory\/[^/]+\/photo$/.test(url.pathname)) {
     const id = url.pathname.split('/')[2];
     if (method === 'GET') {
@@ -305,6 +380,13 @@ server.on('request', async (req, res) => {
     return;
   }
 
+  /**
+   * @route POST /search
+   * @description Пошук інвентаря за ID
+   * @returns {200} OK
+   * @returns {404} Not Found
+   * @accept application/x-www-form-urlencoded
+   */
   if (url.pathname === '/search') {
     if (method !== 'POST') {
       res.statusCode = 405;

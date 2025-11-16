@@ -20,7 +20,9 @@
   "homepage": "https://github.com/ArseniyMuska06/backend-course-2025-6#readme",
   "dependencies": {
     "commander": "^14.0.2",
-    "superagent": "^10.2.3"
+    "superagent": "^10.2.3",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
